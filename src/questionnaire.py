@@ -1,4 +1,4 @@
-import transformers
+from transformers import pipeline
 import pytest
 
 def calculateur_reponse(tab_questions):

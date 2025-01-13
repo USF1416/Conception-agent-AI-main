@@ -1,39 +1,30 @@
+import transformers
 import pytest
 
 def calculateur_reponse(tab_questions):
     """
-    Classifie un texte vers SISR ou SLAM en se basant sur la présence de mots-clés.
+    Classifie un texte vers SISR ou SLAM en se basant sur un modèle pré-entraîné.
     """
+    # Chargement d'un modèle IA pré-entraîné pour le NLP
+    classifier = pipeline("zero-shot-classification", model="facebook/bart-large-mnli")
+
     sisr_keywords = [
-        "os", "windows server", "unix", "linux", "powershell", "bash", "virtualisation", "docker", "kubernetes",
-        "infrastructure as code", "ansible", "cloud", "aws", "azure", "gcp", "réseau", "vlan", "tcp/ip",
-        "ipv4", "ipv6", "routeur", "commutateur", "switch", "firewall", "pfsense", "iptables", "dns", "dhcp",
-        "ftp", "ssh", "vpn", "snmp", "monitoring", "sécurité réseau", "audit", "logs", "nas", "san", "high availability",
-        "cluster", "raid", "backup", "drp", "active directory", "gestion des comptes", "iam", "wireshark", "analyse de paquets"
+        "virtualisation", "maintenance des réseaux", "sécurité des infrastructures", "serveurs", "cloud computing"
     ]
 
     slam_keywords = [
-        "html", "css", "javascript", "typescript", "frontend", "backend", "node.js", "python", "framework web",
-        "api", "rest", "graphql", "crud", "responsive design", "web design", "ui/ux", "react", "angular", "vue.js",
-        "symfony", "laravel", "django", "cms", "wordpress", "joomla", "seo"
-    ]
+        "programmation", "développement web", "applications", "API", "bases de données"]
 
-    sisr_score = 0
-    slam_score = 0
+    combined_text = " ".join(tab_questions)
 
-    for question in tab_questions:
-        for word in question.split():
-            if word.lower() in sisr_keywords:
-                sisr_score += 1
-            elif word.lower() in slam_keywords:
-                slam_score += 1
+    result = classifier(
+        combined_text,
+        candidate_labels=["SISR", "SLAM"],
+        hypothesis_template="Ce texte est lié à {}."
+    )
 
-    if sisr_score > slam_score:
-        return 'SISR est plus adaptée'
-    elif sisr_score < slam_score:
-        return 'SLAM est plus adaptée'
-    else:
-        return 'Les deux options conviennent'
+    best_label = result["labels"][0]
+    return f"L'orientation recommandée est : {best_label}"
 
 def questionnaire():
     q1 = input("Aimez-vous travailler sur des serveurs et la virtualisation ? (Oui/Non) ").lower()

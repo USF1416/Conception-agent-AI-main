@@ -37,3 +37,17 @@ def questionnaire():
 
 if __name__ == "__main__":
     print(questionnaire())
+
+# Tests unitaires
+def test_calculateur_reponse_sisr():
+    responses = ["J'aime travailler avec des serveurs", "La virtualisation m'intéresse", "Maintenance réseau"]
+    assert "SISR" in calculateur_reponse(responses)
+
+def test_calculateur_reponse_slam():
+    responses = ["J'aime développer des applications", "Programmation", "Développement web"]
+    assert "SLAM" in calculateur_reponse(responses)
+
+def test_calculateur_reponse_mixed():
+    responses = ["Serveurs", "Programmation"]
+    result = calculateur_reponse(responses)
+    assert "SISR" in result or "SLAM" in result

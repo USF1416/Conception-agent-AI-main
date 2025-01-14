@@ -1,9 +1,29 @@
-{
-    "questions": [
-        "reseaux",
-        "reseaux",
-        "reseaux",
-        "reseaux"
-    ],
-    "resultat": "SISR est plus adaptée"
-}
+[
+    {
+        "questions": [
+            "reseaux",
+            "reseaux",
+            "reseaux",
+            "reseaux"
+        ],
+        "resultat": "SISR est plus adaptée"
+    },
+    {
+        "questions": [
+            "logiciel",
+            "logiciel",
+            "logiciel",
+            "logiciel"
+        ],
+        "resultat": "SISR est plus adaptée"
+    },
+    {
+        "questions": [
+            "application",
+            "application",
+            "application",
+            "application"
+        ],
+        "resultat": "SLAM est plus adaptée"
+    }
+]

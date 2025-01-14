@@ -10,7 +10,15 @@ def charger_modele():
 classifieur = charger_modele()
 
 # Catégories pour SISR et SLAM (renommées pour une meilleure compréhension)
-categories = ["Travail sur les systèmes et réseaux", "Développement d'applications"]
+categories = [
+    "virtualisation", "sécurité", "cloud", "routage", "configuration réseau",
+    "programmation", "bases de données", "design logiciel", "gestion de projet", "intégration continue",
+    "firewall", "serveurs", "DNS", "VPN", "hyperviseurs",
+    "algorithmes", "interfaces utilisateur", "applications mobiles", "API", "tests unitaires",
+    "cybersécurité", "analyse réseau", "monitoring", "scripting", "administration système",
+    "frameworks", "bases NoSQL", "bases SQL", "optimisation de requêtes", "gestion de version",
+    "conteneurs", "virtualisation avancée", "diagnostics système", "protocoles réseau", "sécurité des données"
+]
 
 # Fonction IA pré-entraînée
 def calculateur_reponse_ia(tab_questions):
@@ -141,6 +149,8 @@ def questionnaire():
         try:
             with open('resultats.json', 'r', encoding='utf-8') as f:
                 data = json.load(f)
+                if isinstance(data, dict):
+                    data = [data]
         except FileNotFoundError:
             data = []
 

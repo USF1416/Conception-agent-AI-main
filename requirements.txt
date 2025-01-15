@@ -1,3 +1,4 @@
 pytest
 transformers
 torch
+pip freeze > requirements.txt

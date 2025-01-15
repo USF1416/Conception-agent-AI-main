@@ -1,5 +1,5 @@
 from transformers import pipeline
-from flask import Flask, request, render_template_string
+from flask import Flask
 import json
 
 # Chargement d'un modèle IA adapté pour le traitement de texte
